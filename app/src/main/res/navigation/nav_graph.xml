@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/overviewFragment">
+
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.andregomesolievira.mymoviesshelf.overview.OverviewFragment"
+        android:label="OverviewFragment">
+        <action
+            android:id="@+id/showDetail"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/showCollection"
+            app:destination="@id/collectionFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.andregomesolievira.mymoviesshelf.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment">
+        <argument
+            android:name="selectedMovie"
+            app:argType="com.andregomesolievira.mymoviesshelf.network.OMDbApiMovie" />
+    </fragment>
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="com.andregomesolievira.mymoviesshelf.collection.CollectionFragment"
+        android:label="collection_fragment"
+        tools:layout="@layout/collection_fragment" />
+</navigation>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Minha prateleira de filmes</string>
+
+    <!-- Movie Properties -->
+    <string name="movie_title">Título: </string>
+    <string name="movie_year">Ano de lançamento: </string>
+    <string name="movie_rated">Classificação Indicativa: </string>
+    <string name="movie_released">Data de Lançamento: </string>
+    <string name="movie_runtime">Tempo de Duração: </string>
+    <string name="movie_genre">Gênero: </string>
+    <string name="movie_director">Direção de: </string>
+    <string name="movie_writer">Escritor(es): </string>
+    <string name="movie_actors">Ator(es): </string>
+    <string name="movie_plot">Sinópse: </string>
+    <string name="movie_language">Idioma: </string>
+    <string name="movie_country">País: </string>
+    <string name="movie_awards">Prêmios: </string>
+    <string name="movie_ratings">Notas: </string>
+    <string name="movie_dvd">Lançamento em disco: </string>
+    <string name="movie_box_office">Box Office: </string>
+    <string name="movie_box_production">Produção: </string>
+
+    <!-- Accessibility -->
+    <string name="accessibility_grid_item_description">O cartaz do filme</string>
+    <string name="accessibility_status_item_description">Uma imagem que mostra o estado do carregamento da lista</string>
+</resources>

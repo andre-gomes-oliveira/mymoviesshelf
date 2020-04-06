@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">My Movies Shelf</string>
+
+    <!-- Movie Properties -->
+    <string name="movie_title">Title: </string>
+    <string name="movie_year">Year: </string>
+    <string name="movie_rated">Rated: </string>
+    <string name="movie_released">Release Date: </string>
+    <string name="movie_runtime">Runtime: </string>
+    <string name="movie_genre">Genre: </string>
+    <string name="movie_director">Director: </string>
+    <string name="movie_writer">Writer(s): </string>
+    <string name="movie_actors">Actor(s): </string>
+    <string name="movie_plot">Synopsis: </string>
+    <string name="movie_language">Language: </string>
+    <string name="movie_country">Country: </string>
+    <string name="movie_awards">Awards: </string>
+    <string name="movie_ratings">Ratings: </string>
+    <string name="movie_dvd">Home disc release: </string>
+    <string name="movie_box_office">Box Office: </string>
+    <string name="movie_box_production">Production: </string>
+
+    <!-- Accessibility -->
+    <string name="accessibility_grid_item_description">The poster for the movie</string>
+    <string name="accessibility_status_item_description">An image that shows the loading operation status</string>
+</resources>

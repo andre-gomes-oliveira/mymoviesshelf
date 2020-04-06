@@ -1,0 +1,21 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="property"
+            type="com.andregomesolievira.mymoviesshelf.network.OMDbApiMovie" />
+    </data>
+
+    <ImageView
+        android:id="@+id/poster_image"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        app:posterUrl="@{property.poster}"
+        tools:src="@tools:sample/backgrounds/scenic"
+        android:contentDescription="@string/accessibility_grid_item_description" />
+</layout>
