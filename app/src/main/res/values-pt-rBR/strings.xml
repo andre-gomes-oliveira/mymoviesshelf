@@ -21,6 +21,9 @@
     <string name="movie_box_office">Box Office: </string>
     <string name="movie_box_production">Produção: </string>
 
+    <!-- Outros -->
+    <string name="search_hint">Digite o título do filme aqui</string>
+
     <!-- Accessibility -->
     <string name="accessibility_grid_item_description">O cartaz do filme</string>
     <string name="accessibility_status_item_description">Uma imagem que mostra o estado do carregamento da lista</string>

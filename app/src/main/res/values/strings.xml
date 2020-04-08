@@ -20,6 +20,9 @@
     <string name="movie_box_office">Box Office: </string>
     <string name="movie_box_production">Production: </string>
 
+    <!-- Additional Strings -->
+    <string name="search_hint">Type the title of the movie here</string>
+
     <!-- Accessibility -->
     <string name="accessibility_grid_item_description">The poster for the movie</string>
     <string name="accessibility_status_item_description">An image that shows the loading operation status</string>

@@ -31,7 +31,7 @@
         tools:layout="@layout/detail_fragment">
         <argument
             android:name="selectedMovie"
-            app:argType="com.andregomesolievira.mymoviesshelf.network.OMDbApiMovie" />
+            app:argType="com.andregomesolievira.mymoviesshelf.network.SimpleMovieParcel" />
     </fragment>
     <fragment
         android:id="@+id/collectionFragment"

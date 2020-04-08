@@ -28,18 +28,27 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 /**
- * A public interface that exposes the [getPropertiesAsync] method
+ * A public interface that exposes the [getMoviesAsync] method
  */
 interface OMDbApiService {
     /**
-     * Returns a Coroutine [Deferred] [List] of [OMDbApiMovie] which can be fetched with await() if
+     * Returns a Coroutine [Deferred] of [SearchParcel] which can be fetched with await() if
      * in a Coroutine scope.
      */
     @GET("/")
-    fun getPropertiesAsync(
+    fun getMoviesAsync(
         @Query("s") search: String,
         @Query("apikey") apikey: String
-    ): Deferred<List<OMDbApiMovie>>
+    ): Deferred<SearchParcel>
+
+    /**
+     * Returns a Coroutine [Deferred] of [OMDbApiMovie] which can be fetched with await() if
+     * in a Coroutine scope.
+     */
+    fun getMovieDetailsAsync(
+        @Query("t") search: String,
+        @Query("apikey") apikey: String
+    ): Deferred<OMDbApiMovie>
 }
 
 /**

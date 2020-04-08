@@ -6,7 +6,7 @@
 
         <variable
             name="property"
-            type="com.andregomesolievira.mymoviesshelf.network.OMDbApiMovie" />
+            type="com.andregomesolievira.mymoviesshelf.network.SimpleMovieParcel" />
     </data>
 
     <ImageView

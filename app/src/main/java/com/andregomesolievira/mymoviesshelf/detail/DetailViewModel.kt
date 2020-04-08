@@ -3,17 +3,18 @@ package com.andregomesolievira.mymoviesshelf.detail
 import android.app.Application
 import androidx.lifecycle.*
 import com.andregomesolievira.mymoviesshelf.R
-import com.andregomesolievira.mymoviesshelf.network.OMDbApiMovie
+import com.andregomesolievira.mymoviesshelf.network.SimpleMovieParcel
 
 /**
  *  The [ViewModel] associated with the [DetailFragment], containing information about the selected
- *  [OMDbApiMovie].
+ *  [SimpleMovieParcel].
  */
-class DetailViewModel(omdbMovieProperty: OMDbApiMovie, app: Application) : AndroidViewModel(app) {
-    private val _selectedProperty = MutableLiveData<OMDbApiMovie>()
+class DetailViewModel(omdbMovieProperty: SimpleMovieParcel, app: Application) :
+    AndroidViewModel(app) {
+    private val _selectedProperty = MutableLiveData<SimpleMovieParcel>()
 
     // The external LiveData for the SelectedProperty
-    val selectedProperty: LiveData<OMDbApiMovie>
+    val selectedProperty: LiveData<SimpleMovieParcel>
         get() = _selectedProperty
 
     // Initialize the _selectedProperty MutableLiveData
@@ -30,6 +31,7 @@ class DetailViewModel(omdbMovieProperty: OMDbApiMovie, app: Application) : Andro
         app.applicationContext.getString(R.string.movie_year) + it.year
     }
 
+    /*
     val displayPropertyRated = Transformations.map(selectedProperty) {
         app.applicationContext.getString(R.string.movie_rated) + it.rated
     }
@@ -89,4 +91,5 @@ class DetailViewModel(omdbMovieProperty: OMDbApiMovie, app: Application) : Andro
     val displayPropertyProduction = Transformations.map(selectedProperty) {
         app.applicationContext.getString(R.string.movie_box_production) + it.production
     }
+     */
 }

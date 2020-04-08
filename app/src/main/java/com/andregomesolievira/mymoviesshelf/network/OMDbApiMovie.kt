@@ -41,12 +41,10 @@ data class OMDbApiMovie(
     @Json(name = "Website") val website: String,
     @Json(name = "Response") val response: String
 ) : Parcelable {
-
     //An inner class that defines the Ratings property of the movie
     @Parcelize
     data class Rating(
         @Json(name = "Source") val source: String,
         @Json(name = "Value") val value: String
-    ) : Parcelable {
-    }
+    ) : Parcelable
 }

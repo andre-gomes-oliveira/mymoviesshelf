@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.andregomesolievira.mymoviesshelf.network.OMDbApi
-import com.andregomesolievira.mymoviesshelf.network.OMDbApiMovie
+import com.andregomesolievira.mymoviesshelf.network.SimpleMovieParcel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+
 
 enum class OMDbApiStatus { LOADING, ERROR, DONE }
 
@@ -17,6 +18,21 @@ enum class OMDbApiStatus { LOADING, ERROR, DONE }
  */
 
 class OverviewViewModel : ViewModel() {
+
+    //Using a simple string property for two-way data binding
+    private var search: String? = null
+
+    fun getSearch(): String? {
+        return search
+    }
+
+    fun setSearch(newSearch: String) {
+        newSearch?.let {
+            search = newSearch
+            getMovieProperties(newSearch)
+        }
+    }
+
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<OMDbApiStatus>()
 
@@ -25,17 +41,17 @@ class OverviewViewModel : ViewModel() {
         get() = _status
 
     // Internally, we use a MutableLiveData, because we will be updating the List of movies
-    private val _properties = MutableLiveData<List<OMDbApiMovie>>()
+    private val _properties = MutableLiveData<List<SimpleMovieParcel>>()
 
     // The external LiveData interface to the property is immutable, so only this class can modify it
-    val properties: LiveData<List<OMDbApiMovie>>
+    val properties: LiveData<List<SimpleMovieParcel>>
         get() = _properties
 
     // Internally, we use a MutableLiveData to handle navigation to the selected property
-    private val _navigateToSelectedProperty = MutableLiveData<OMDbApiMovie>()
+    private val _navigateToSelectedProperty = MutableLiveData<SimpleMovieParcel>()
 
     // The external immutable LiveData for the navigation property
-    val navigateToSelectedProperty: LiveData<OMDbApiMovie>
+    val navigateToSelectedProperty: LiveData<SimpleMovieParcel>
         get() = _navigateToSelectedProperty
 
     // Create a Coroutine scope using a job to be able to cancel when needed
@@ -48,22 +64,22 @@ class OverviewViewModel : ViewModel() {
      * Call getMovieProperties() on init so we can display status immediately.
      */
     init {
-        getMovieProperties("Batman") // todo testing
+        getMovieProperties("Batman") // Initializing with the best search :)
     }
 
     /**
      * Gets filtered movie property information from the OMDb API Retrofit service and
-     * updates the [OMDbApiMovie] [List] and [OMDbApiStatus] [LiveData].
+     * updates the [SimpleMovieParcel] [List] and [OMDbApiStatus] [LiveData].
      * @param title the movie title that is sent as part of the web server request
      */
     private fun getMovieProperties(search: String) {
         coroutineScope.launch {
-            val getPropertiesDeferred = OMDbApi.retrofitService.getPropertiesAsync(search, "")
+            val getPropertiesDeferred = OMDbApi.retrofitService.getMoviesAsync(search, "")
             try {
                 _status.value = OMDbApiStatus.LOADING
-                val listResult = getPropertiesDeferred.await()
+                val searchResult = getPropertiesDeferred.await()
                 _status.value = OMDbApiStatus.DONE
-                _properties.value = listResult
+                _properties.value = searchResult.movies
             } catch (e: Exception) {
                 _status.value = OMDbApiStatus.ERROR
                 _properties.value = ArrayList()
@@ -81,9 +97,9 @@ class OverviewViewModel : ViewModel() {
 
     /**
      * When the property is clicked, set the [_navigateToSelectedProperty] [MutableLiveData]
-     * @param OMDbApiMovie The [OMDbApiMovie] that was clicked on.
+     * @param SimpleMovieParcel The [SimpleMovieParcel] that was clicked on.
      */
-    fun displayPropertyDetails(movieProperty: OMDbApiMovie) {
+    fun displayPropertyDetails(movieProperty: SimpleMovieParcel) {
         _navigateToSelectedProperty.value = movieProperty
     }
 
@@ -92,14 +108,5 @@ class OverviewViewModel : ViewModel() {
      */
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedProperty.value = null
-    }
-
-    /**
-     * Updates the data set filter for the web services by querying the data with the new filter
-     * by calling [getMovieProperties]
-     * @param options the [Map] of options that is sent as part of the web server request
-     */
-    fun updateFilter(search: String) {
-        getMovieProperties(search)
     }
 }

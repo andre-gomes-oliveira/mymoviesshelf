@@ -3,13 +3,13 @@ package com.andregomesolievira.mymoviesshelf.detail
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.andregomesolievira.mymoviesshelf.network.OMDbApiMovie
+import com.andregomesolievira.mymoviesshelf.network.SimpleMovieParcel
 
 /**
  * Simple ViewModel factory that provides the movie and context to the ViewModel.
  */
 class DetailViewModelFactory(
-    private val movie: OMDbApiMovie,
+    private val movie: SimpleMovieParcel,
     private val application: Application
 ) : ViewModelProvider.Factory {
 
