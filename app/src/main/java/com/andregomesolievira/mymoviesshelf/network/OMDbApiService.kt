@@ -45,6 +45,7 @@ interface OMDbApiService {
      * Returns a Coroutine [Deferred] of [OMDbApiMovie] which can be fetched with await() if
      * in a Coroutine scope.
      */
+    @GET("/")
     fun getMovieDetailsAsync(
         @Query("t") search: String,
         @Query("apikey") apikey: String

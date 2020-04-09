@@ -36,7 +36,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/accessibility_grid_item_description"
                     android:scaleType="centerCrop"
-                    app:posterUrl="@{viewModel.selectedProperty.poster}"
+                    app:posterUrl="@{viewModel.selectedMovie.poster}"
                     tools:src="@tools:sample/backgrounds/scenic" />
 
                 <androidx.appcompat.widget.Toolbar
@@ -80,16 +80,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/detail_title"
                     tools:text="Year" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/share_fab"
-                    style="@style/floatingButtonTheme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
-                    app:srcCompat="@drawable/ic_favorite_border_black_24dp" />
-
-                <!--
                 <TextView
                     android:id="@+id/detail_rated"
                     android:layout_width="wrap_content"
@@ -224,10 +214,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detail_box_office"
                     tools:text="Production" />
-                -->
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/save_fab"
+            style="@style/floatingButtonTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{(view) -> viewModel.onFABClicked(view)}"
+            app:layout_anchorGravity="bottom|end"
+            app:srcCompat="@drawable/ic_favorite_border_black_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
 

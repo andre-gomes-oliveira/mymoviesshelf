@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.andregomesolievira.mymoviesshelf.database.MovieDatabase
 import com.andregomesolievira.mymoviesshelf.databinding.DetailFragmentBinding
 
 /**
@@ -19,10 +20,11 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val application = requireNotNull(activity).application
+        val dataSource = MovieDatabase.getInstance(application).movieDatabaseDao
         val binding = DetailFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
         val movie = DetailFragmentArgs.fromBundle(arguments!!).selectedMovie
-        val viewModelFactory = DetailViewModelFactory(movie, application)
+        val viewModelFactory = DetailViewModelFactory(movie, dataSource, application)
         binding.viewModel = ViewModelProviders.of(
             this, viewModelFactory
         ).get(DetailViewModel::class.java)

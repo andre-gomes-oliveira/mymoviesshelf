@@ -34,6 +34,20 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    //groovy
+    configurations.all {
+        resolutionStrategy.force "org.antlr:antlr4-runtime:$version_antlr"
+        resolutionStrategy.force "org.antlr:antlr4-tool:$version_antlr"
+    }
+
+    //kotlin DSL
+    configurations.all {
+        resolutionStrategy {
+            force("org.antlr:antlr4-runtime:$version_antlr")
+            force("org.antlr:antlr4-tool:$version_antlr")
+        }
+    }
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
@@ -57,6 +71,9 @@ dependencies {
     // Core with Ktx
     implementation "androidx.core:core-ktx:$version_core"
 
+    // Material COmponents
+    implementation "com.google.android.material:material:$version_material"
+
     // Moshi
     implementation "com.squareup.moshi:moshi:$version_moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
@@ -78,8 +95,9 @@ dependencies {
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 
-    // Material COmponents
-    implementation "com.google.android.material:material:$version_material"
+    //Room
+    implementation "androidx.room:room-runtime:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
 
     //Test
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

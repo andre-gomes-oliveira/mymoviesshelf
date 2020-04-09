@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.andregomesolievira.mymoviesshelf.network.OMDbApi
+import com.andregomesolievira.mymoviesshelf.network.OMDbApiMovie
 import com.andregomesolievira.mymoviesshelf.network.SimpleMovieParcel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,10 +28,8 @@ class OverviewViewModel : ViewModel() {
     }
 
     fun setSearch(newSearch: String) {
-        newSearch?.let {
-            search = newSearch
-            getMovieProperties(newSearch)
-        }
+        search = newSearch
+        getMovieProperties(newSearch)
     }
 
     // The internal MutableLiveData that stores the status of the most recent request
@@ -48,10 +47,10 @@ class OverviewViewModel : ViewModel() {
         get() = _properties
 
     // Internally, we use a MutableLiveData to handle navigation to the selected property
-    private val _navigateToSelectedProperty = MutableLiveData<SimpleMovieParcel>()
+    private val _navigateToSelectedProperty = MutableLiveData<OMDbApiMovie>()
 
     // The external immutable LiveData for the navigation property
-    val navigateToSelectedProperty: LiveData<SimpleMovieParcel>
+    val navigateToSelectedProperty: LiveData<OMDbApiMovie>
         get() = _navigateToSelectedProperty
 
     // Create a Coroutine scope using a job to be able to cancel when needed
@@ -74,7 +73,7 @@ class OverviewViewModel : ViewModel() {
      */
     private fun getMovieProperties(search: String) {
         coroutineScope.launch {
-            val getPropertiesDeferred = OMDbApi.retrofitService.getMoviesAsync(search, "")
+            val getPropertiesDeferred = OMDbApi.retrofitService.getMoviesAsync(search, "f19bb759")
             try {
                 _status.value = OMDbApiStatus.LOADING
                 val searchResult = getPropertiesDeferred.await()
@@ -100,7 +99,11 @@ class OverviewViewModel : ViewModel() {
      * @param SimpleMovieParcel The [SimpleMovieParcel] that was clicked on.
      */
     fun displayPropertyDetails(movieProperty: SimpleMovieParcel) {
-        _navigateToSelectedProperty.value = movieProperty
+        coroutineScope.launch {
+            val getMovieDetailsDeferred =
+                OMDbApi.retrofitService.getMovieDetailsAsync(movieProperty.title, "f19bb759")
+            _navigateToSelectedProperty.value = getMovieDetailsDeferred.await()
+        }
     }
 
     /**
