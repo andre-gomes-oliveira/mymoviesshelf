@@ -16,7 +16,7 @@ data class MovieEntity(
     @PrimaryKey val imdbID: String,
 
     /**
-     * The tile and the poster of the movie are the informations that will be stored
+     * The tile and the poster of the movie are the information that will be stored
      * Any additional information will be queried when necessary from the [OMDBApiService]
      * */
     @ColumnInfo(name = "movie_title") val title: String,

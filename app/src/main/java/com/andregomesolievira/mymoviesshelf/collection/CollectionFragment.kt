@@ -6,27 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.andregomesolievira.mymoviesshelf.R
+import com.andregomesolievira.mymoviesshelf.database.MovieDatabase
+import com.andregomesolievira.mymoviesshelf.databinding.CollectionFragmentBinding
+import com.andregomesolievira.mymoviesshelf.overview.PosterGridAdapter
 
 class CollectionFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = CollectionFragment()
-    }
-
-    private lateinit var viewModel: CollectionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.collection_fragment, container, false)
-    }
+        val application = requireNotNull(activity).application
+        val dataSource = MovieDatabase.getInstance(application).movieDatabaseDao
+        val binding = CollectionFragmentBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        val viewModelFactory = CollectionViewModelFactory(dataSource, application)
+        binding.viewModel = ViewModelProviders.of(
+            this, viewModelFactory
+        ).get(CollectionViewModel::class.java)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+        // Sets the adapter of the posterGrid RecyclerView with clickHandler lambda that
+        // tells the viewModel when our property is clicked
+        binding.collectionPostersGrid.adapter = PosterGridAdapter(null)
 
+        return binding.root
+    }
 }

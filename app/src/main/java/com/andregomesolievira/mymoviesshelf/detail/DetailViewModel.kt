@@ -128,14 +128,14 @@ class DetailViewModel(
      */
     fun onFABClicked(view: View) {
         val fab = view.findViewById<FloatingActionButton>(R.id.save_fab)
-        if (isMovieLiked) {
+        isMovieLiked = if (isMovieLiked) {
             onMovieDisliked()
             fab.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            isMovieLiked = false
+            false
         } else {
             onMovieLiked()
             fab.setImageResource(R.drawable.ic_favorite_black_24dp)
-            isMovieLiked = true
+            true
         }
     }
 

@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Minha prateleira de filmes</string>
 
-    <!-- Movie Properties -->
+    <!-- MovieEntity Properties -->
     <string name="movie_title">Título: </string>
     <string name="movie_year">Ano de lançamento: </string>
     <string name="movie_rated">Classificação Indicativa: </string>

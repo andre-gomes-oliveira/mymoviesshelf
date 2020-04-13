@@ -50,5 +50,18 @@
             app:omdbApiStatus="@{viewModel.status}"
             android:contentDescription="@string/accessibility_status_item_description" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{() -> viewModel.onNavigateToCollectionFABClicked()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_folder_special_black_24dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

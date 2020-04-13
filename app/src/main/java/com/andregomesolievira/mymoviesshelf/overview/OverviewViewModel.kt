@@ -17,7 +17,6 @@ enum class OMDbApiStatus { LOADING, ERROR, DONE }
 /**
  * The [ViewModel] that is attached to the [MovieFragment].
  */
-
 class OverviewViewModel : ViewModel() {
 
     //Using a simple string property for two-way data binding
@@ -46,12 +45,19 @@ class OverviewViewModel : ViewModel() {
     val properties: LiveData<List<SimpleMovieParcel>>
         get() = _properties
 
-    // Internally, we use a MutableLiveData to handle navigation to the selected property
+    // Internally, use a MutableLiveData to handle navigation to the selected property
     private val _navigateToSelectedProperty = MutableLiveData<OMDbApiMovie>()
 
     // The external immutable LiveData for the navigation property
     val navigateToSelectedProperty: LiveData<OMDbApiMovie>
         get() = _navigateToSelectedProperty
+
+    // Internally, use a MutableLiveData to handle navigation to the selected property
+    private val _navigateToCollection = MutableLiveData<Boolean>()
+
+    // The external immutable LiveData for the navigation property
+    val navigateToCollection: LiveData<Boolean>
+        get() = _navigateToCollection
 
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
@@ -107,9 +113,25 @@ class OverviewViewModel : ViewModel() {
     }
 
     /**
-     * After the navigation has taken place, make sure navigateToSelectedProperty is set to null
+     * After the navigation has taken place, set navigateToSelectedProperty to null
      */
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedProperty.value = null
+    }
+
+    /**
+     * After the navigation has taken place, set navigateToSelectedProperty to null
+     */
+    fun displayCollectionComplete() {
+        _navigateToCollection.value = false
+    }
+
+    /**
+     * Executes when the FAB button is clicked.
+     */
+    fun onNavigateToCollectionFABClicked() {
+        coroutineScope.launch {
+            _navigateToCollection.value = true
+        }
     }
 }

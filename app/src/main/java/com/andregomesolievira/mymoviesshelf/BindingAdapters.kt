@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.andregomesolievira.mymoviesshelf.database.MovieEntity
 import com.andregomesolievira.mymoviesshelf.network.SimpleMovieParcel
 import com.andregomesolievira.mymoviesshelf.overview.OMDbApiStatus
 import com.andregomesolievira.mymoviesshelf.overview.PosterGridAdapter
@@ -12,12 +13,25 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 /**
- * When there is no Movie property data (data is null), hide the [RecyclerView], otherwise show it.
+ * When there is no MovieEntity property data (data is null), hide the [RecyclerView], otherwise show it.
  */
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<SimpleMovieParcel>?) {
     val adapter = recyclerView.adapter as PosterGridAdapter
     adapter.submitList(data)
+}
+
+@BindingAdapter("listEntities")
+fun bindMovieEntities(recyclerView: RecyclerView, data: List<MovieEntity>?) {
+    data?.let {
+        val movies: MutableList<SimpleMovieParcel> = mutableListOf()
+        data.forEach {
+            val movie = SimpleMovieParcel(it.title, it.imdbID, it.poster)
+            movies.add(movie)
+        }
+
+        bindRecyclerView(recyclerView, movies)
+    }
 }
 
 /**

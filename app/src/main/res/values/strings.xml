@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Movies Shelf</string>
 
-    <!-- Movie Properties -->
+    <!-- MovieEntity Properties -->
     <string name="movie_title">Title: </string>
     <string name="movie_year">Year: </string>
     <string name="movie_rated">Rated: </string>

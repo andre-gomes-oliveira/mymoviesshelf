@@ -37,5 +37,9 @@
         android:id="@+id/collectionFragment"
         android:name="com.andregomesolievira.mymoviesshelf.collection.CollectionFragment"
         android:label="collection_fragment"
-        tools:layout="@layout/collection_fragment" />
+        tools:layout="@layout/collection_fragment">
+        <action
+            android:id="@+id/action_collectionFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>

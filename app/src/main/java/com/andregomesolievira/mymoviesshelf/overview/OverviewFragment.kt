@@ -53,6 +53,18 @@ class OverviewFragment : Fragment() {
             }
         })
 
+        // Observe the navigateToCollection LiveData and Navigate when it isn't null
+        // After navigating, call displayCollectionComplete() so that the ViewModel is ready
+        // for another navigation event.
+        viewModel.navigateToCollection.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                // Must find the NavController from the Fragment
+                this.findNavController().navigate(OverviewFragmentDirections.showCollection())
+                // Tell the ViewModel we've made the navigate call to prevent multiple navigation
+                viewModel.displayCollectionComplete()
+            }
+        })
+
         setHasOptionsMenu(true)
         return binding.root
     }

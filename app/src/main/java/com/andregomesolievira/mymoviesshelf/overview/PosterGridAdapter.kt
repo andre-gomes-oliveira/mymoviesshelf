@@ -13,7 +13,7 @@ import com.andregomesolievira.mymoviesshelf.network.SimpleMovieParcel
  * data, including computing diffs between lists.
  * @param onClick a lambda that handles onClick operations
  */
-class PosterGridAdapter(private val onClickListener: OnClickListener) :
+class PosterGridAdapter(private val onClickListener: OnClickListener?) :
     ListAdapter<SimpleMovieParcel, PosterGridAdapter.MoviePropertyViewHolder>(DiffCallback) {
     /**
      * The MoviePropertyViewHolder constructor takes the binding variable from the associated
@@ -63,7 +63,7 @@ class PosterGridAdapter(private val onClickListener: OnClickListener) :
     override fun onBindViewHolder(holder: MoviePropertyViewHolder, position: Int) {
         val movieProperty = getItem(position)
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(movieProperty)
+            onClickListener?.onClick(movieProperty)
         }
         holder.bind(movieProperty)
     }
